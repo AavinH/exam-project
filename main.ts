@@ -2,14 +2,34 @@ namespace SpriteKind {
     export const baby = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    sprite.setPosition(77, 102)
     info.changeLifeBy(-1)
+    sprite.setImage(assets.image`bloodshed`)
+    pause(1000)
+    sprite.setImage(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . 5 5 5 5 5 . . . . . . 
+        . . . . . 5 5 5 f 5 5 . . . . . 
+        . . . . . 5 5 5 5 5 5 4 . . . . 
+        . . . . . 5 5 5 5 5 . . . . . . 
+        . . . . . . 5 5 5 . . . . . . . 
+        . . . . . 5 5 5 5 5 . . . . . . 
+        . . . . 5 5 5 5 5 5 5 . . . . . 
+        . . . . 5 5 5 5 5 5 5 . . . . . 
+        . . . . . . 4 . . 4 . . . . . . 
+        . . . . . . 4 . . 4 . . . . . . 
+        . . . . . . 4 . . 4 . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `)
+    sprite.setPosition(77, 102)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.baby, function (sprite, otherSprite) {
     otherSprite.destroy()
     info.changeScoreBy(1)
     music.baDing.playUntilDone()
-    speed = 2 * speed
+    speed = 1.2 * speed
     mama_duck.setPosition(77, 102)
     duckilings = sprites.create(img`
         . . . . . . . . . . . . . . . . 
@@ -203,5 +223,5 @@ info.setLife(3)
 info.setScore(0)
 game.onUpdateInterval(1500, function () {
     projectile2 = sprites.createProjectileFromSide(assets.image`fireball`, speed, 0)
-    projectile2.y = randint(15, 105)
+    projectile2.y = randint(50, 105)
 })
